@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const noblox = require('noblox.js');
 const app = express();
+const cookie = ""
 
 app.use(express.json());
 
@@ -18,8 +19,7 @@ app.use(async (req, res, next) => {
 
 app.post("/ranker", async (req, res) => {
     try {
-        const { userid, rank, grupid, cookie } = req.body;
-        await noblox.setCookie(parseInt(cookie));
+        const { userid, rank, grupid } = req.body;
         await noblox.setRank(parseInt(grupid), parseInt(userid), parseInt(rank));
         res.json({ message: "Ranked!" });
     } catch (error) {
